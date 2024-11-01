@@ -5,6 +5,7 @@ import { JsonRpcSigner } from "ethers";
 import { seringContractAddress } from "@/config";
 
 import DefaultLayout from "@/layouts/default";
+import ModelsTable from "@/components/ModelsTable";
 
 export default function IndexPage() {
   const [models, setModels] = useState<any[]>([]);
@@ -25,9 +26,9 @@ export default function IndexPage() {
         );
         console.log("models", broker);
         // 获取模型列表
-        const modelList = broker.modelProcessor.listModels();
-        // setModels(modelList);
-        // console.log("models", modelList);
+        const modelList = await broker.modelProcessor.listModels();
+        setModels(modelList);
+        console.log("models", modelList);
       } catch (error) {
         console.error("Error initializing broker or fetching models:", error);
       }
@@ -53,6 +54,7 @@ export default function IndexPage() {
             </ul>
           </div>
         )}
+        <ModelsTable />
       </div>
     </DefaultLayout>
   );
