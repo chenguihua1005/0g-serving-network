@@ -4,19 +4,11 @@ import { initializeBroker } from "@/services/brokerService";
 import { JsonRpcSigner } from "ethers";
 import { seringContractAddress } from "@/config";
 
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 
 export default function IndexPage() {
   const [models, setModels] = useState<any[]>([]);
-  const signer = useEthersSigner();
+  const { signer, connectWallet } = useEthersSigner();
 
   useEffect(() => {
     const initBroker = async () => {
@@ -24,70 +16,44 @@ export default function IndexPage() {
         console.warn("No signer available");
         return;
       }
+
       try {
         // 初始化 broker
         const broker = await initializeBroker(
           signer as JsonRpcSigner,
           seringContractAddress
         );
-        // // 获取模型列表
-        // const modelList = await broker.modelProcessor.listModels();
+        console.log("models", broker);
+        // 获取模型列表
+        const modelList = broker.modelProcessor.listModels();
         // setModels(modelList);
-        // console.log("models", models);
+        // console.log("models", modelList);
       } catch (error) {
         console.error("Error initializing broker or fetching models:", error);
       }
     };
 
-    initBroker();
-  }, []);
+    if (signer) {
+      initBroker();
+    }
+  }, [signer]); // 当 signer 更新时重新运行 initBroker
 
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-lg text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-          <br />
-          <span className={title()}>
-            websites regardless of your design experience.
-          </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
+      <div>
+        <button onClick={connectWallet}>Connect Wallet</button>
+        {signer ? <p>Wallet connected</p> : <p>No wallet connected</p>}
+        {models.length > 0 && (
+          <div>
+            <h2>Models List</h2>
+            <ul>
+              {models.map((model, index) => (
+                <li key={index}>{model.name}</li>
+              ))}
+            </ul>
           </div>
-        </div>
-
-        <div className="flex gap-3">
-          <Link
-            isExternal
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-            })}
-            href={siteConfig.links.docs}
-          >
-            Documentation
-          </Link>
-          <Link
-            isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig.links.github}
-          >
-            <GithubIcon size={20} />
-            GitHub
-          </Link>
-        </div>
-
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-          </Snippet>
-        </div>
-      </section>
+        )}
+      </div>
     </DefaultLayout>
   );
 }
