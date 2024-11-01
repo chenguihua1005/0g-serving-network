@@ -10,6 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@0glabs/0g-serving-broker": "https://github.com/0glabs/0g-serving-user-broker.git",
+    "@tanstack/react-query": "5.45.1",
+    "@types/sinon": "^17.0.3",
+    "@wagmi/core": "^2.13.8",
+    "dayjs": "^1.11.13",
+    "ethers": "6.13.1",
+    "next": "14.2.4",
+    "openai": "^4.67.3",
+    "react-chatbotify": "2.0.0-beta.16",
+    "sinon": "^19.0.2",
+    "viem": "latest",
+    "wagmi": "latest",
     "@nextui-org/button": "2.0.38",
     "@nextui-org/code": "2.0.33",
     "@nextui-org/input": "2.2.5",
