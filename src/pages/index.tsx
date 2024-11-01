@@ -6,6 +6,7 @@ import ModelDetail from "@/components/ModelDetail";
 import { JsonRpcSigner } from "ethers";
 import { seringContractAddress } from "@/config";
 import logo from "@/assets/logo.svg";
+import rightIcon from "@/assets/right.svg";
 
 export default function IndexPage() {
   const [models, setModels] = useState<any[]>([]);
@@ -56,11 +57,33 @@ export default function IndexPage() {
       <div className="container mx-auto px-4 py-6">
         <header className="flex items-center justify-between">
           {/* 左侧Logo和导航文字 */}
-          <div className="flex items-center space-x-4">
-            <img src={logo} alt="Logo" className="w-16 h-16" />
-            <span className="text-lg font-semibold">Playgrounds</span>
-            <span className="text-gray-400">|</span>
-            <span className="text-lg font-semibold">Models</span>
+          <div className="flex items-center space-x-2 bg-white rounded-lg p-2 shadow-sm">
+            <img src={logo} alt="Logo" className="w-8 h-8" />
+            {/* 调整Logo大小 */}
+            {/* 导航文字及图标 */}
+            <div className="flex items-center space-x-2">
+              <span className="text-lg font-semibold text-black">
+                Playgrounds
+              </span>
+              <img
+                src={rightIcon}
+                alt="Right Icon"
+                className="w-3 h-3 text-purple-500"
+              />
+              {/* 右箭头图标 */}
+            </div>
+            {/* 分隔符 */}
+            <span className="text-gray-300 mx-2">|</span>
+            {/* Models文字及图标 */}
+            <div className="flex items-center space-x-2">
+              <span className="text-lg font-semibold text-black">Models</span>
+              <img
+                src={rightIcon}
+                alt="Right Icon"
+                className="w-3 h-3 text-purple-500"
+              />
+              {/* 右箭头图标 */}
+            </div>
           </div>
           {/* 右侧中间部分导航和钱包功能 */}
           <div className="flex items-center space-x-6">
@@ -77,9 +100,14 @@ export default function IndexPage() {
                 Connect Wallet
               </button>
             ) : (
-              <div className="flex items-center space-x-2 bg-pink-100 rounded-full px-4 py-2">
-                <span className="text-pink-700 font-semibold">{balance}</span>
-                <button className="bg-pink-500 text-white px-4 py-1 rounded-full">
+              <div className="flex items-center rounded-full bg-white border-2 border-blue-500 overflow-hidden">
+                {/* 显示金额部分 */}
+                <span className="text-blue-500 font-semibold px-4 py-1 bg-white">
+                  {balance}
+                </span>
+
+                {/* Deposit按钮部分 */}
+                <button className="bg-blue-500 text-white px-4 py-1 font-semibold rounded-full">
                   Deposit
                 </button>
               </div>

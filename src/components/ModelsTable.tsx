@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-
+import checkmarkIcon from "@/assets/check-mark.svg";
 type Model = {
   Name: string;
   Author: string;
@@ -52,9 +51,9 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
               <td className="px-6 py-4">{model.Type}</td>
               <td className="px-6 py-4">{model.Price}</td>
               <td className="px-6 py-4">{model.ZGAlignmentScore}</td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 flex items-center space-x-1">
                 <span
-                  className={`inline-block rounded-full px-3 py-1 text-sm font-semibold ${
+                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ${
                     model.Verifiability === "Ultra-Secure"
                       ? "bg-green-100 text-green-700"
                       : model.Verifiability === "Secure"
@@ -63,6 +62,13 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
                   }`}
                 >
                   {model.Verifiability}
+                  {["Ultra-Secure", "Secure"].includes(model.Verifiability) && (
+                    <img
+                      src={checkmarkIcon}
+                      alt="Checkmark"
+                      className="w-4 h-4 ml-1"
+                    />
+                  )}
                 </span>
               </td>
             </tr>
