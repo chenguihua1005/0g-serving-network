@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Select, SelectItem } from "@nextui-org/react";
 import { useEthersSigner } from "@/utils/ethers";
 import { initializeBroker } from "@/services/brokerService";
 import ModelsTable from "@/components/ModelsTable";
@@ -7,6 +8,12 @@ import { JsonRpcSigner } from "ethers";
 import { seringContractAddress } from "@/config";
 import logo from "@/assets/logo.svg";
 import rightIcon from "@/assets/right.svg";
+import chatIcon from "@/assets/chat.svg";
+import attachmentIcon from "@/assets/attachment.svg";
+
+interface ChatProps {
+  onBack: () => void; // 返回回调函数
+}
 
 export default function IndexPage() {
   const [models, setModels] = useState<any[]>([]);
@@ -14,6 +21,9 @@ export default function IndexPage() {
   const [balance, setBalance] = useState<string>("$10.00");
   const [broker, setBroker] = useState<any>(null);
   const [selectedModel, setSelectedModel] = useState<any>(null);
+  const [selectedModelName, setSelectedModelName] = useState<string>("");
+  const [selectedProviderName, setSelectedProviderName] = useState<string>("");
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     const initBroker = async () => {
@@ -50,6 +60,83 @@ export default function IndexPage() {
 
   const handleBackToList = () => {
     setSelectedModel(null);
+  };
+
+  const handleBackToModelDetail = () => {
+    setShowChat(false); // 返回时显示 ModelDetail 模块
+  };
+
+  const handleConfirm = () => {
+    setShowChat(true); // 点击确认后显示 Chat 模块
+  };
+
+  const onModelSelectionchange = async (e) => {
+    console.log("onModelSelectionchange", e.target.value);
+    setSelectedModelName(e.target.value);
+    const modelData = await broker.modelProcessor.getModel(selectedModelName);
+    setSelectedModel(modelData);
+  };
+
+  const onProviderSelectionchange = async (e) => {
+    const selectedProvider = selectedModel?.Providers.find(
+      (provider) => provider.Name === e.target.value
+    );
+    setSelectedProviderName(selectedProvider?.Name);
+    console.log("selectedProvider", selectedModelName);
+  };
+
+  const Chat: React.FC<ChatProps> = ({ onBack }) => {
+    return (
+      <div className="p-6">
+        {/* 顶部导航栏 */}
+        <header className="flex mb-4">
+          <div className="flex items-center space-x-4 mt-2">
+            <img src={chatIcon} alt="Checkmark" className="w-4 h-4 ml-1" />
+            <div>Chat</div>
+            <div className="flex space-x-4">
+              <div className="relative bg-gradient-to-r from-[#FFDB3B] via-[#FFA18F] to-[#FF6270] rounded-md p-[1px]">
+                <Select
+                  placeholder="Select Model"
+                  className="w-56 bg-white rounded-md"
+                  selectedKeys={[selectedModelName]}
+                  onChange={onModelSelectionchange}
+                >
+                  {models.map((model) => (
+                    <SelectItem key={model.Name}>{model.Name}</SelectItem>
+                  ))}
+                </Select>
+              </div>
+
+              <div className="relative bg-gradient-to-r from-[#FFDB3B] via-[#FFA18F] to-[#FF6270] rounded-md p-[1px]">
+                <Select
+                  placeholder="Select Provider"
+                  className="w-56 bg-white rounded-md"
+                  selectedKeys={[selectedProviderName]}
+                  onChange={onProviderSelectionchange}
+                >
+                  {selectedModel?.Providers?.map((provider) => (
+                    <SelectItem key={provider.Name}>{provider.Name}</SelectItem>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Chat 选择框和对话区域 */}
+        <div className="flex flex-col bg-[#FFFBF5E5] p-4 rounded-lg shadow-md h-96">
+          <div className="mt-4">Please select model and service provider.</div>
+        </div>
+
+        {/* 用户输入框 */}
+        <div className="mt-4 flex items-center pt-4">
+          <input
+            className="flex-grow border bg-[#FFFBF5E5] rounded-lg p-2 h-20"
+            placeholder="Add content"
+          />
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -128,7 +215,17 @@ export default function IndexPage() {
             </div>
           </>
         ) : (
-          <ModelDetail modelData={selectedModel} onBack={handleBackToList} />
+          <div className="p-6">
+            {!showChat ? (
+              <ModelDetail
+                modelData={selectedModel}
+                onBack={handleBackToList}
+                onConfirm={handleConfirm} // 传递确认函数
+              />
+            ) : (
+              <Chat onBack={handleBackToModelDetail} /> // 传递返回函数
+            )}
+          </div>
         )}
       </div>
     </div>

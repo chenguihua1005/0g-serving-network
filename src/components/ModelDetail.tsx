@@ -44,9 +44,14 @@ type ModelData = {
 interface ModelDetailProps {
   modelData: ModelData;
   onBack: () => void;
+  onConfirm: () => void;
 }
 
-const ModelDetail: React.FC<ModelDetailProps> = ({ modelData, onBack }) => {
+const ModelDetail: React.FC<ModelDetailProps> = ({
+  modelData,
+  onBack,
+  onConfirm,
+}) => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(
     null
   );
@@ -173,9 +178,10 @@ const ModelDetail: React.FC<ModelDetailProps> = ({ modelData, onBack }) => {
         <Modal
           isOpen={isOpen}
           onOpenChange={onOpenChange}
+          hideCloseButton={true}
           className="p-6 rounded-lg bg-white"
         >
-          <ModalContent className="rounded-3xl border-2 border-blue-500 p-6">
+          <ModalContent className="rounded-3xl border-1 p-6">
             {(onClose) => (
               <>
                 <ModalHeader className="flex justify-center mb-3">
@@ -227,7 +233,10 @@ const ModelDetail: React.FC<ModelDetailProps> = ({ modelData, onBack }) => {
                   </Button>
                   <Button
                     className="bg-blue-600 text-white rounded-full"
-                    onClick={onClose}
+                    onClick={() => {
+                      onClose();
+                      onConfirm();
+                    }}
                     fullWidth
                   >
                     Confirm
