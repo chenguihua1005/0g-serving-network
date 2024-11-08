@@ -119,7 +119,7 @@ export default function IndexPage() {
       setUserInput("");
       // Mock API response
       setResponseMessage(
-        `Web3 network's cheer,Tokens thrive, AI is near,No loss in sight, clear!`
+        `Web3 network's cheer, tokens thrive, AI is near, no loss in sight, clear!`
       );
       setTimeout(() => {
         setIsTyping(true);
@@ -199,14 +199,16 @@ export default function IndexPage() {
               <div className="self-start bg-[#9CA3AF] rounded-lg p-3 flex items-center space-x-2 w-1/2">
                 <span>{displayedMessage}</span>
               </div>
-              <div className="flex self-center items-center mr-14 text-green-500">
-                <span className="text-sm font-medium">Verified</span>
-                <img
-                  src={checkmarkIcon}
-                  alt="Checkmark"
-                  className="w-4 h-4 ml-1"
-                />
-              </div>
+              {displayedMessage?.length > 72 && (
+                <div className="flex self-center items-center mr-14 text-green-500">
+                  <span className="text-sm font-medium">Verified</span>
+                  <img
+                    src={checkmarkIcon}
+                    alt="Checkmark"
+                    className="w-4 h-4 ml-1"
+                  />
+                </div>
+              )}
             </>
           )}
         </div>

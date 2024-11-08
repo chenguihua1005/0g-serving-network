@@ -61,7 +61,7 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
               <td className="px-6 py-4">{model.Name}</td>
               <td className="px-6 py-4">{model.Author}</td>
               <td className="px-6 py-4">{model.Type}</td>
-              <td className="px-6 py-4">{model.Price}</td>
+              <td className="px-6 py-4 font-semibold">{model.Price}</td>
               <td className="px-6 py-4">{model.ZGAlignmentScore}</td>
               <td className="px-6 py-4 flex items-center space-x-1">
                 {model.Verifiability === "Ultra-Secure" && (

@@ -179,7 +179,9 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                     </>
                   )}
                 </td>
-                <td className="px-4 py-2">${provider.InputPrice}</td>
+                <td className="px-4 py-2 font-semibold">
+                  ${provider.InputPrice}
+                </td>
               </tr>
             ))}
           </tbody>
