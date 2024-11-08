@@ -85,7 +85,20 @@ export default function IndexPage() {
     console.log("selectedProvider", selectedModelName);
   };
 
-  const Chat: React.FC<ChatProps> = ({ onBack }) => {
+  const Chat: React.FC = ({ onBack }) => {
+    const [userInput, setUserInput] = useState("");
+    const [userMessage, setUserMessage] = useState("");
+    const [responseMessage, setResponseMessage] = useState(
+      "Please tell me your question..."
+    );
+
+    const handleSend = () => {
+      setUserMessage(userInput);
+      setUserInput("");
+      // Mock API response
+      setResponseMessage("How can zero-knowledge proofs (ZKPs) be used...");
+    };
+
     return (
       <div className="p-6">
         {/* 顶部导航栏 */}
@@ -123,17 +136,36 @@ export default function IndexPage() {
           </div>
         </header>
 
-        {/* Chat 选择框和对话区域 */}
-        <div className="flex flex-col bg-[#FFFBF5E5] p-4 rounded-lg shadow-md h-96">
-          <div className="mt-4">Please select model and service provider.</div>
+        {/* 对话框区域 */}
+        {/* 聊天对话区域 */}
+        <div className="flex flex-col bg-[#FFFBF5] rounded-lg shadow-md p-4 mb-4 space-y-4 h-[400px] overflow-y-auto">
+          {/* 显示用户输入的消息 */}
+          {userMessage && (
+            <div className="self-end bg-gray-300 rounded-lg p-3">
+              {userMessage}
+            </div>
+          )}
+          {/* 模拟接口回复的消息 */}
+          <div className="self-start bg-gray-200 rounded-lg p-3">
+            {responseMessage}
+            <span className="text-green-500 ml-2">Verified ✓</span>
+          </div>
         </div>
 
         {/* 用户输入框 */}
-        <div className="mt-4 flex items-center pt-4">
+        <div className="flex items-center pt-4">
           <input
-            className="flex-grow border bg-[#FFFBF5E5] rounded-lg p-2 h-20"
-            placeholder="Add content"
+            className="flex-grow border rounded-lg p-2"
+            placeholder="Type your message here."
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
           />
+          <button
+            className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+            onClick={handleSend}
+          >
+            Send Message
+          </button>
         </div>
       </div>
     );
