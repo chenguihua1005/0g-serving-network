@@ -91,24 +91,28 @@ export default function IndexPage() {
     const [userInput, setUserInput] = useState("");
     const [userMessage, setUserMessage] = useState("");
     const [responseMessage, setResponseMessage] = useState("");
-    // const [displayedMessage, setDisplayedMessage] = useState("");
+    const [isTyping, setIsTyping] = useState(false);
+    const [displayedMessage, setDisplayedMessage] = useState("");
 
-    // useEffect(() => {
-    //   if (!responseMessage) return; // 如果没有消息，退出
+    useEffect(() => {
+      if (!responseMessage) return; // 如果没有消息，退出
 
-    //   let currentIndex = 0;
-    //   setDisplayedMessage(""); // 重置消息
+      let currentIndex = -1;
+      setDisplayedMessage(""); // 重置消息
 
-    //   const typeWriterEffect = () => {
-    //     if (currentIndex < responseMessage.length) {
-    //       setDisplayedMessage((prev) => prev + responseMessage[currentIndex]);
-    //       currentIndex++;
-    //       setTimeout(typeWriterEffect, 50); // 控制打字速度
-    //     }
-    //   };
+      const typeWriterEffect = () => {
+        if (currentIndex < responseMessage.length) {
+          // 确保不添加 undefined
+          setDisplayedMessage(
+            (prev) => prev + responseMessage.charAt(currentIndex)
+          );
+          currentIndex++;
+          setTimeout(typeWriterEffect, 50); // 控制打字速度
+        }
+      };
 
-    //   typeWriterEffect();
-    // }, [responseMessage]);
+      typeWriterEffect();
+    }, [isTyping]);
 
     const handleSend = () => {
       setUserMessage(userInput);
@@ -117,6 +121,9 @@ export default function IndexPage() {
       setResponseMessage(
         `Web3 network's cheer,Tokens thrive, AI is near,No loss in sight, clear!`
       );
+      setTimeout(() => {
+        setIsTyping(true);
+      }, 1000);
     };
 
     return (
@@ -187,10 +194,10 @@ export default function IndexPage() {
             </div>
           )}
           {/* 模拟接口回复的消息 */}
-          {responseMessage?.length > 0 && (
+          {displayedMessage?.length > 0 && (
             <>
               <div className="self-start bg-[#9CA3AF] rounded-lg p-3 flex items-center space-x-2 w-1/2">
-                <span>{responseMessage}</span>
+                <span>{displayedMessage}</span>
               </div>
               <div className="flex self-center items-center mr-14 text-green-500">
                 <span className="text-sm font-medium">Verified</span>
