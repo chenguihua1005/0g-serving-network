@@ -10,6 +10,7 @@ import logo from "@/assets/logo.svg";
 import rightIcon from "@/assets/right.svg";
 import chatIcon from "@/assets/chat.svg";
 import attachmentIcon from "@/assets/attachment.svg";
+import checkmarkIcon from "@/assets/check-mark.svg";
 
 interface ChatProps {
   onBack: () => void; // 返回回调函数
@@ -66,8 +67,10 @@ export default function IndexPage() {
     setShowChat(false); // 返回时显示 ModelDetail 模块
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = (modelName: string, providerName: string) => {
     setShowChat(true); // 点击确认后显示 Chat 模块
+    setSelectedModelName(modelName);
+    setSelectedProviderName(providerName);
   };
 
   const onModelSelectionchange = async (e) => {
@@ -88,15 +91,33 @@ export default function IndexPage() {
   const Chat: React.FC = ({ onBack }) => {
     const [userInput, setUserInput] = useState("");
     const [userMessage, setUserMessage] = useState("");
-    const [responseMessage, setResponseMessage] = useState(
-      "Please tell me your question..."
-    );
+    const [responseMessage, setResponseMessage] = useState("");
+    // const [displayedMessage, setDisplayedMessage] = useState("");
+
+    // useEffect(() => {
+    //   if (!responseMessage) return; // 如果没有消息，退出
+
+    //   let currentIndex = 0;
+    //   setDisplayedMessage(""); // 重置消息
+
+    //   const typeWriterEffect = () => {
+    //     if (currentIndex < responseMessage.length) {
+    //       setDisplayedMessage((prev) => prev + responseMessage[currentIndex]);
+    //       currentIndex++;
+    //       setTimeout(typeWriterEffect, 50); // 控制打字速度
+    //     }
+    //   };
+
+    //   typeWriterEffect();
+    // }, [responseMessage]);
 
     const handleSend = () => {
       setUserMessage(userInput);
       setUserInput("");
       // Mock API response
-      setResponseMessage("How can zero-knowledge proofs (ZKPs) be used...");
+      setResponseMessage(
+        `Web3 network's cheer,Tokens thrive, AI is near,No loss in sight, clear!`
+      );
     };
 
     return (
@@ -141,15 +162,26 @@ export default function IndexPage() {
         <div className="flex flex-col bg-[#FFFBF5] rounded-lg shadow-md p-4 mb-4 space-y-4 h-[400px] overflow-y-auto">
           {/* 显示用户输入的消息 */}
           {userMessage && (
-            <div className="self-end bg-gray-300 rounded-lg p-3">
+            <div className="self-end bg-[#D1D5DB] rounded-lg p-3">
               {userMessage}
             </div>
           )}
           {/* 模拟接口回复的消息 */}
-          <div className="self-start bg-gray-200 rounded-lg p-3">
-            {responseMessage}
-            <span className="text-green-500 ml-2">Verified ✓</span>
-          </div>
+          {responseMessage?.length > 0 && (
+            <>
+              <div className="self-start bg-[#9CA3AF] rounded-lg p-3 flex items-center space-x-2 w-1/2">
+                <span>{responseMessage}</span>
+              </div>
+              <div className="flex self-center items-center mr-14 text-green-500">
+                <span className="text-sm font-medium">Verified</span>
+                <img
+                  src={checkmarkIcon}
+                  alt="Checkmark"
+                  className="w-4 h-4 ml-1"
+                />
+              </div>
+            </>
+          )}
         </div>
 
         {/* 用户输入框 */}
@@ -173,7 +205,7 @@ export default function IndexPage() {
             onClick={handleSend}
           >
             <img src={attachmentIcon} alt="Checkmark" className="w-4 h-4" />
-            <span className="font-normal">Add content</span>
+            <span className="font-normal text-md">Add content</span>
           </button>
         </div>
       </div>
@@ -181,22 +213,20 @@ export default function IndexPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-purple-100 to-yellow-100">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#F9D9CF] to-[#F3CD98]">
       <div className="container mx-auto px-4 py-6">
         <header className="flex items-center justify-between">
           {/* 左侧Logo和导航文字 */}
-          <div className="flex items-center space-x-2 bg-white rounded-lg p-2 shadow-sm">
-            <img src={logo} alt="Logo" className="w-8 h-8" />
+          <div className="flex items-center space-x-2 bg-white border border-[#14141414] rounded-lg p-2 shadow-sm">
+            <img src={logo} alt="Logo" className="w-12 h-8" />
             {/* 调整Logo大小 */}
             {/* 导航文字及图标 */}
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-semibold text-black">
-                Playgrounds
-              </span>
+              <span className="text-lg text-black">Playgrounds</span>
               <img
                 src={rightIcon}
                 alt="Right Icon"
-                className="w-3 h-3 text-purple-500"
+                className="w-3 h-3 text-[#B14EFF]"
               />
               {/* 右箭头图标 */}
             </div>
@@ -204,11 +234,11 @@ export default function IndexPage() {
             <span className="text-gray-300 mx-2">|</span>
             {/* Models文字及图标 */}
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-semibold text-black">Models</span>
+              <span className="text-lg text-black">Models</span>
               <img
                 src={rightIcon}
                 alt="Right Icon"
-                className="w-3 h-3 text-purple-500"
+                className="w-3 h-3 text-[#B14EFF]"
               />
               {/* 右箭头图标 */}
             </div>
@@ -216,7 +246,7 @@ export default function IndexPage() {
           {/* 右侧中间部分导航和钱包功能 */}
           <div className="flex items-center space-x-6">
             {/* Docs 和 Ranking 靠右显示 */}
-            <div className="flex items-center space-x-6 text-gray-700 mr-6">
+            <div className="flex items-center space-x-6 text-black font-normal text-[18px] mr-6">
               <span className="hover:text-black cursor-pointer">Docs</span>
               <span className="hover:text-black cursor-pointer">Ranking</span>
             </div>

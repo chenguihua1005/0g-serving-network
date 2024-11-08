@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import leftIcon from "@/assets/left.svg";
 import openNewIcon from "@/assets/open-new.svg";
+import openNewIcon2 from "@/assets/open-new2.svg";
 import checkmarkIcon from "@/assets/check-mark.svg";
 import {
   Modal,
@@ -44,7 +45,7 @@ type ModelData = {
 interface ModelDetailProps {
   modelData: ModelData;
   onBack: () => void;
-  onConfirm: () => void;
+  onConfirm: (modelName: string, providerName: string) => void;
 }
 
 const ModelDetail: React.FC<ModelDetailProps> = ({
@@ -78,7 +79,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
       {/* Model Information */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
         <h2 className="text-2xl font-semibold mb-4">{modelData.Name}</h2>
-        <div className="flex justify-between items-center border-blue-200 rounded-lg p-4 mb-4">
+        <div className="flex justify-between items-center border-[#D1D5DB] p-4 mb-4 border-t-1">
           <div className="text-center">
             <div className="text-pink-500 text-xl font-bold">
               {modelData.Price}
@@ -106,7 +107,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
             href={modelData.HuggingFaceURL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-purple-500 font-semibold hover:underline flex items-center"
+            className="text-[#B14EFF] hover:text-[#B14EFF] hover:underline #B14EFF] font-semibold hover:underline flex items-center"
           >
             Huggingface
           </a>
@@ -119,11 +120,13 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
       </div>
 
       {/* Service Providers */}
-      <h3 className="text-lg font-semibold mb-2">Service Providers</h3>
+      <h3 className="text-[20px] text-[#111827] font-semibold mb-2">
+        Service Providers
+      </h3>
       <div className="overflow-auto">
         <table className="w-full bg-white rounded-lg shadow-md">
           <thead>
-            <tr className="text-left border-b border-gray-300 text-gray-600">
+            <tr className="text-left border-b border-gray-300 text-[#141414]">
               <th className="px-4 py-2">Service Providers</th>
               <th className="px-4 py-2">Device</th>
               <th className="px-4 py-2">Geolocation</th>
@@ -147,25 +150,30 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                 <td className="px-4 py-2">{provider.Uptime}</td>
                 <td className="px-4 py-2 flex items-center space-x-2">
                   <span
-                    className={`flex items-center px-2 py-1 rounded-full ${
-                      provider.Verifiability === "Ultra-Secure"
-                        ? "bg-green-100 text-green-600"
-                        : provider.Verifiability === "Secure"
-                          ? "bg-blue-100 text-blue-600"
-                          : "bg-gray-100 text-gray-600"
+                    className={`flex items-center px-1 py-1 rounded-full ${
+                      provider.Verifiability === "Secure"
+                        ? "text-[#484848] font-bold"
+                        : "text-[#484848] font-normal"
                     }`}
                   >
                     {provider.Verifiability}
-                    {["Ultra-Secure", "Secure"].includes(
-                      provider.Verifiability
-                    ) && (
+                  </span>
+                  {["Ultra-Secure", "Secure"].includes(
+                    provider.Verifiability
+                  ) && (
+                    <>
                       <img
                         src={checkmarkIcon}
                         alt="Checkmark"
-                        className="w-4 h-4 ml-1"
+                        className="w-4 h-4"
                       />
-                    )}
-                  </span>
+                      <img
+                        src={openNewIcon2}
+                        alt="Open in new tab"
+                        className="w-4 h-4"
+                      />
+                    </>
+                  )}
                 </td>
                 <td className="px-4 py-2">${provider.InputPrice}</td>
               </tr>
@@ -185,17 +193,17 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
             {(onClose) => (
               <>
                 <ModalHeader className="flex justify-center mb-3">
-                  <h2 className="text-2xl font-bold text-center">
+                  <h2 className="text-2xl font-semibold text-center">
                     Confirmation
                   </h2>
                 </ModalHeader>
                 <ModalBody className="space-y-4">
                   <div>
-                    <p className="text-lg font-semibold">Model Details:</p>
+                    <p className="text-base font-semibold">Model Details:</p>
                     <p className="text-base">{modelData.Name}</p>
                   </div>
                   <div>
-                    <p className="text-lg font-semibold">
+                    <p className="text-base font-semibold">
                       Service Provider Details:
                     </p>
                     <p className="text-base">
@@ -209,7 +217,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                     </p>
                   </div>
                   <div>
-                    <p className="text-lg font-semibold">Pricing:</p>
+                    <p className="text-base font-semibold">Pricing:</p>
                     <div className="p-4 border rounded-lg bg-gray-50">
                       <p className="text-blue-500 text-lg font-bold">
                         ${selectedProvider.InputPrice}
@@ -235,7 +243,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                     className="bg-blue-600 text-white rounded-full"
                     onClick={() => {
                       onClose();
-                      onConfirm();
+                      onConfirm(modelData.Name, selectedProvider.Name);
                     }}
                     fullWidth
                   >
