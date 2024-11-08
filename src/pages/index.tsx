@@ -258,14 +258,14 @@ export default function IndexPage() {
                 Connect Wallet
               </button>
             ) : (
-              <div className="flex items-center rounded-full bg-white border-2 border-blue-500 overflow-hidden">
+              <div className="flex items-center rounded-full bg-white border border-[#FF1CE6] overflow-hidden">
                 {/* 显示金额部分 */}
                 <span className="text-blue-500 font-semibold px-4 py-1 bg-white">
                   {balance}
                 </span>
 
                 {/* Deposit按钮部分 */}
-                <button className="bg-blue-500 text-white px-4 py-1 font-semibold rounded-full">
+                <button className="bg-[#FF1CE6] text-white px-4 py-1 font-semibold rounded-full">
                   Deposit
                 </button>
               </div>

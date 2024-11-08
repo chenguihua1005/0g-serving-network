@@ -1,4 +1,9 @@
 import checkmarkIcon from "@/assets/check-mark.svg";
+import basicIcon from "@/assets/basic.svg";
+import secureIcon from "@/assets/secure.svg";
+import ultraSecureIcon from "@/assets/ultra-secure.svg";
+import infoIcon from "@/assets/info.svg";
+
 type Model = {
   Name: string;
   Author: string;
@@ -16,7 +21,7 @@ interface ModelsTableProps {
 
 const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
   const columns = [
-    { key: "Name", label: "Model Name" },
+    { key: "Name", label: "Models" },
     { key: "Author", label: "Author" },
     { key: "Type", label: "Type" },
     { key: "Price", label: "Pricing (per 1M Tokens)" },
@@ -28,13 +33,20 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
     <div className="overflow-x-auto shadow-lg rounded-lg">
       <table className="min-w-full bg-white border border-gray-200 rounded-lg">
         <thead>
-          <tr className="bg-gray-100 text-left">
+          <tr className="text-left">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="px-6 py-3 border-b font-medium text-gray-700"
+                className="px-6 py-3 border-b font-semibold text-md text-gray-700"
               >
-                {col.label}
+                <div className="flex items-center">
+                  {col.label}
+                  <img
+                    src={infoIcon}
+                    alt="Info Icon"
+                    className="w-4 h-4 ml-1"
+                  />
+                </div>
               </th>
             ))}
           </tr>
@@ -52,23 +64,37 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
               <td className="px-6 py-4">{model.Price}</td>
               <td className="px-6 py-4">{model.ZGAlignmentScore}</td>
               <td className="px-6 py-4 flex items-center space-x-1">
+                {model.Verifiability === "Ultra-Secure" && (
+                  <img
+                    src={ultraSecureIcon}
+                    alt="Ultra-Secure Icon"
+                    className="w-8 h-8 mr-1"
+                  />
+                )}
+                {model.Verifiability === "Secure" && (
+                  <img
+                    src={secureIcon}
+                    alt="Secure Icon"
+                    className="w-8 h-8 mr-1"
+                  />
+                )}
+                {model.Verifiability === "Basic" && (
+                  <img
+                    src={basicIcon}
+                    alt="Basic Icon"
+                    className="w-8 h-8 mr-1"
+                  />
+                )}
                 <span
-                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ${
+                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm italic text-[#484848] ${
                     model.Verifiability === "Ultra-Secure"
-                      ? "bg-green-100 text-green-700"
+                      ? "font-bold"
                       : model.Verifiability === "Secure"
-                        ? "bg-blue-100 text-blue-700"
-                        : "bg-gray-100 text-gray-700"
+                        ? "font-bold"
+                        : ""
                   }`}
                 >
                   {model.Verifiability}
-                  {["Ultra-Secure", "Secure"].includes(model.Verifiability) && (
-                    <img
-                      src={checkmarkIcon}
-                      alt="Checkmark"
-                      className="w-4 h-4 ml-1"
-                    />
-                  )}
                 </span>
               </td>
             </tr>

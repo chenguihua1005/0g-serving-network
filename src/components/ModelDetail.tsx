@@ -67,7 +67,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
   return (
     <div className="p-6">
       {/* Breadcrumb */}
-      <div className="flex items-center mb-4 text-gray-600 text-sm">
+      <div className="flex items-center mb-2 text-gray-600 text-sm">
         <img src={leftIcon} alt="Logo" className="w-4 h-4" />
         <span className="cursor-pointer text-blue-500" onClick={onBack}>
           Models
@@ -76,38 +76,42 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
         <span className="font-semibold">{modelData.Name}</span>
       </div>
 
+      <div className="mb-4 text-base text-[#374151]">
+        All information and deployment options for this model.
+      </div>
+
       {/* Model Information */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
         <h2 className="text-2xl font-semibold mb-4">{modelData.Name}</h2>
         <div className="flex justify-between items-center border-[#D1D5DB] p-4 mb-4 border-t-1">
-          <div className="text-center">
-            <div className="text-pink-500 text-xl font-bold">
+          <div className="text-left">
+            <div className="text-[#EC6AB7] text-xl font-bold">
               {modelData.Price}
             </div>
-            <div className="text-gray-500 text-sm">Per 1M Tokens</div>
+            <div className="text-black text-sm">Per 1M Tokens</div>
           </div>
-          <div className="text-center">
-            <div className="text-pink-500 text-xl font-bold">
+          <div className="text-left">
+            <div className="text-[#EC6AB7] text-xl font-bold">
               {modelData.ZGAlignmentScore}
             </div>
-            <div className="text-gray-500 text-sm">0G Alignment Score</div>
+            <div className="text-black text-sm">0G Alignment Score</div>
           </div>
-          <div className="text-center">
-            <div className="text-pink-500 text-xl font-bold">
+          <div className="text-left">
+            <div className="text-[#EC6AB7] text-xl font-bold">
               {modelData.UserInteractedNumber.toLocaleString()}
             </div>
-            <div className="text-gray-500 text-sm">
+            <div className="text-black text-sm">
               Users interacted with model
             </div>
           </div>
         </div>
         <p className="text-gray-600 mb-2">{modelData.Description}</p>
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1 mt-6">
           <a
             href={modelData.HuggingFaceURL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#B14EFF] hover:text-[#B14EFF] hover:underline #B14EFF] font-semibold hover:underline flex items-center"
+            className="text-[#B14EFF] hover:text-[#B14EFF] hover:underline #B14EFF] hover:underline flex items-center"
           >
             Huggingface
           </a>
@@ -219,12 +223,10 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                   <div>
                     <p className="text-base font-semibold">Pricing:</p>
                     <div className="p-4 border rounded-lg bg-gray-50">
-                      <p className="text-blue-500 text-lg font-bold">
+                      <p className="text-[#E51AF7] text-sm font-bold">
                         ${selectedProvider.InputPrice}
                       </p>
-                      <p className="text-blue-500 text-sm font-bold">
-                        per 1M tokens
-                      </p>
+                      <p className="text-[#E51AF7] text-sm">per 1M tokens</p>
                       <p className="text-xs text-gray-500">
                         Pay as you go, with cost based on actual usage.
                       </p>
@@ -233,14 +235,14 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                 </ModalBody>
                 <ModalFooter className="flex justify-between">
                   <Button
-                    className="text-[#FF1CE6] bg-white border border-blue-600 rounded-full"
+                    className="text-[#FF1CE6] bg-white border border-[#FF1CE6] rounded-full"
                     onClick={onClose}
                     fullWidth
                   >
                     Cancel
                   </Button>
                   <Button
-                    className="bg-blue-600 text-white rounded-full"
+                    className="bg-[#FF1CE6] text-white rounded-full"
                     onClick={() => {
                       onClose();
                       onConfirm(modelData.Name, selectedProvider.Name);
