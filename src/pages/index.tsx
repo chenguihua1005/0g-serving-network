@@ -85,7 +85,6 @@ export default function IndexPage() {
       (provider) => provider.Name === e.target.value
     );
     setSelectedProviderName(selectedProvider?.Name);
-    console.log("selectedProvider", selectedModelName);
   };
 
   const Chat: React.FC = ({ onBack }) => {
@@ -143,14 +142,35 @@ export default function IndexPage() {
 
               <div className="relative bg-gradient-to-r from-[#FFDB3B] via-[#FFA18F] to-[#FF6270] rounded-md p-[1px]">
                 <Select
+                  items={selectedModel?.Providers}
                   placeholder="Select Provider"
-                  className="w-56 bg-white rounded-md"
-                  selectedKeys={[selectedProviderName]}
+                  className="w-60 bg-white rounded-md"
+                  defaultSelectedKeys={[selectedProviderName]}
                   onChange={onProviderSelectionchange}
+                  renderValue={(items) => {
+                    return (
+                      <div className="flex flex-wrap gap-2">
+                        {items.map((item) => (
+                          <div>{item.textValue}</div>
+                        ))}
+                      </div>
+                    );
+                  }}
                 >
-                  {selectedModel?.Providers?.map((provider) => (
-                    <SelectItem key={provider.Name}>{provider.Name}</SelectItem>
-                  ))}
+                  {(provider) => (
+                    <SelectItem key={provider.Name} textValue={provider.Name}>
+                      <span className="flex items-center space-x-2">
+                        <span>{provider.Name}</span>
+                        {["Ultra-Secure", "Secure"].includes(
+                          provider.Verifiability
+                        ) && (
+                          <span className="border border-[#FF1CE6] text-[#FF1CE6] rounded-full px-2 py-0.5 text-sm">
+                            Verified
+                          </span>
+                        )}
+                      </span>
+                    </SelectItem>
+                  )}
                 </Select>
               </div>
             </div>
