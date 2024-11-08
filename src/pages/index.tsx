@@ -189,7 +189,7 @@ export default function IndexPage() {
         <div className="flex flex-col bg-[#FFFBF5] rounded-lg shadow-md p-4 mb-4 space-y-4 h-[400px] overflow-y-auto">
           {/* 显示用户输入的消息 */}
           {userMessage && (
-            <div className="self-end bg-[#D1D5DB] rounded-lg p-3">
+            <div className="self-end bg-[#D1D5DB] rounded-lg p-3 max-w-[60%]">
               {userMessage}
             </div>
           )}
