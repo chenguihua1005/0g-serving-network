@@ -153,18 +153,27 @@ export default function IndexPage() {
         </div>
 
         {/* 用户输入框 */}
-        <div className="flex items-center pt-4">
+        <div className="relative border rounded-lg bg-[#FFF7F0] h-24 p-3">
+          {/* 输入框文本 */}
           <input
-            className="flex-grow border rounded-lg p-2"
+            className="absolute top-0 left-0 w-full bg-transparent border-none outline-none placeholder-gray-500 text-base p-2"
             placeholder="Type your message here."
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault(); // 阻止默认换行行为
+                handleSend(); // 发送消息
+              }
+            }}
           />
+          {/* 按钮部分 */}
           <button
-            className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="absolute bottom-2 right-2 text-black flex items-center space-x-2"
             onClick={handleSend}
           >
-            Send Message
+            <img src={attachmentIcon} alt="Checkmark" className="w-4 h-4" />
+            <span className="font-normal">Add content</span>
           </button>
         </div>
       </div>
