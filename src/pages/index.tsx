@@ -242,7 +242,10 @@ export default function IndexPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#F9D9CF] to-[#F3CD98]">
+    <div
+      className="relative min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/src/assets/background.png')" }}
+    >
       <div className="container mx-auto py-6">
         <header className="flex items-center justify-between">
           {/* 左侧Logo和导航文字 */}
