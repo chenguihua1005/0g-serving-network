@@ -30,21 +30,21 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
   ];
 
   return (
-    <div className="overflow-x-auto shadow-lg rounded-lg">
+    <div className="overflow-x-auto shadow-lg rounded-2xl">
       <table className="min-w-full bg-white border border-gray-200 rounded-lg">
         <thead>
           <tr className="text-left">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="px-6 py-3 border-b font-semibold text-md text-gray-700"
+                className="px-6 py-3 border-b font-semibold text-lg text-[#141414]"
               >
                 <div className="flex items-center">
                   {col.label}
                   <img
                     src={infoIcon}
                     alt="Info Icon"
-                    className="w-4 h-4 ml-1"
+                    className="w-4 h-4 ml-1 mt-1"
                   />
                 </div>
               </th>
@@ -55,43 +55,39 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
           {models.map((model) => (
             <tr
               key={model.Name}
-              className="border-b hover:bg-gray-50 cursor-pointer"
+              className="border-b hover:bg-gray-50 cursor-pointer text-lg text-[#484848]"
               onClick={() => onModelClick(model.Name)}
             >
               <td className="px-6 py-4">{model.Name}</td>
               <td className="px-6 py-4">{model.Author}</td>
               <td className="px-6 py-4">{model.Type}</td>
-              <td className="px-6 py-4 font-semibold">{model.Price}</td>
+              <td className="px-6 py-4">{model.Price}</td>
               <td className="px-6 py-4">{model.ZGAlignmentScore}</td>
               <td className="px-6 py-4 flex items-center space-x-1">
                 {model.Verifiability === "Ultra-Secure" && (
                   <img
                     src={ultraSecureIcon}
                     alt="Ultra-Secure Icon"
-                    className="w-8 h-8 mr-1"
+                    className="w-9 mr-1"
                   />
                 )}
                 {model.Verifiability === "Secure" && (
                   <img
                     src={secureIcon}
                     alt="Secure Icon"
-                    className="w-8 h-8 mr-1"
+                    className="w-9 mr-1"
                   />
                 )}
                 {model.Verifiability === "Basic" && (
-                  <img
-                    src={basicIcon}
-                    alt="Basic Icon"
-                    className="w-8 h-8 mr-1"
-                  />
+                  <img src={basicIcon} alt="Basic Icon" className="w-9 mr-1" />
                 )}
                 <span
-                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm italic text-[#484848] ${
+                  className={`flex items-center px-3 py-1 italic ${
                     model.Verifiability === "Ultra-Secure"
-                      ? "font-bold"
+                      ? " font-bold"
                       : model.Verifiability === "Secure"
-                        ? "font-bold"
-                        : ""
+                        ? " font-bold"
+                        : "font-normal"
                   }`}
                 >
                   {model.Verifiability}

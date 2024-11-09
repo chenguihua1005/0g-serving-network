@@ -127,12 +127,12 @@ export default function IndexPage() {
     };
 
     return (
-      <div className="p-6">
+      <div className="py-2">
         {/* 顶部导航栏 */}
         <header className="flex mb-4">
-          <div className="flex items-center space-x-4 mt-2">
+          <div className="flex items-center space-x-4">
             <img src={chatIcon} alt="Checkmark" className="w-4 h-4 ml-1" />
-            <div>Chat</div>
+            <div className="text-lg">Chat</div>
             <div className="flex space-x-4">
               <div className="relative bg-gradient-to-r from-[#FFDB3B] via-[#FFA18F] to-[#FF6270] rounded-md p-[1px]">
                 <Select
@@ -186,21 +186,21 @@ export default function IndexPage() {
 
         {/* 对话框区域 */}
         {/* 聊天对话区域 */}
-        <div className="flex flex-col bg-[#FFFBF5] rounded-lg shadow-md p-4 mb-4 space-y-4 h-[400px] overflow-y-auto">
+        <div className="flex flex-col bg-[#FFFBF5] rounded-2xl shadow-md p-4 mb-4 space-y-4 h-[400px] overflow-y-auto">
           {/* 显示用户输入的消息 */}
           {userMessage && (
-            <div className="self-end bg-[#D1D5DB] rounded-lg p-3 max-w-[60%]">
+            <div className="self-end bg-[#D1D5DB] rounded-xl p-3 max-w-[60%]">
               {userMessage}
             </div>
           )}
           {/* 模拟接口回复的消息 */}
           {displayedMessage?.length > 0 && (
             <>
-              <div className="self-start bg-[#9CA3AF] rounded-lg p-3 flex items-center space-x-2 w-1/2">
+              <div className="self-start bg-[#9CA3AF] rounded-xl p-3 flex items-center space-x-2 w-9/20">
                 <span>{displayedMessage}</span>
               </div>
               {displayedMessage?.length > 72 && (
-                <div className="flex self-center items-center mr-14 text-green-500">
+                <div className="flex self-left items-center ml-[425px] text-green-500">
                   <span className="text-sm font-medium">Verified</span>
                   <img
                     src={checkmarkIcon}
@@ -214,7 +214,7 @@ export default function IndexPage() {
         </div>
 
         {/* 用户输入框 */}
-        <div className="relative border rounded-lg bg-[#FFF7F0] h-24 p-3">
+        <div className="relative border rounded-2xl bg-[#FFF7F0] h-28 p-3">
           {/* 输入框文本 */}
           <input
             className="absolute top-0 left-0 w-full bg-transparent border-none outline-none placeholder-gray-500 text-base p-2"
@@ -234,7 +234,7 @@ export default function IndexPage() {
             onClick={handleSend}
           >
             <img src={attachmentIcon} alt="Checkmark" className="w-4 h-4" />
-            <span className="font-normal text-md">Add content</span>
+            <span className="font-normal text-lg">Add content</span>
           </button>
         </div>
       </div>
@@ -243,39 +243,32 @@ export default function IndexPage() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#F9D9CF] to-[#F3CD98]">
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto py-6">
         <header className="flex items-center justify-between">
           {/* 左侧Logo和导航文字 */}
           <div className="flex items-center space-x-2 bg-white border border-[#14141414] rounded-lg p-2 shadow-sm">
             <img src={logo} alt="Logo" className="w-12 h-8" />
             {/* 调整Logo大小 */}
             {/* 导航文字及图标 */}
-            <div className="flex items-center space-x-2">
-              <span className="text-lg text-black">Playgrounds</span>
-              <img
-                src={rightIcon}
-                alt="Right Icon"
-                className="w-3 h-3 text-[#B14EFF]"
-              />
+            <div className="flex items-center space-x-2 pr-2">
+              <span className="text-base text-[#141414]">Playgrounds</span>
+              <img src={rightIcon} alt="Right Icon" className="w-2 h-2 mt-1" />
               {/* 右箭头图标 */}
             </div>
             {/* 分隔符 */}
-            <span className="text-gray-300 mx-2">|</span>
             {/* Models文字及图标 */}
-            <div className="flex items-center space-x-2">
-              <span className="text-lg text-black">Models</span>
-              <img
-                src={rightIcon}
-                alt="Right Icon"
-                className="w-3 h-3 text-[#B14EFF]"
-              />
+            <div className="flex items-center space-x-2 border-l border-l-[#1414141A] pl-4 pr-2">
+              <span className="text-base text-[#141414] font-semibold">
+                Models
+              </span>
+              <img src={rightIcon} alt="Right Icon" className="w-2 h-2 mt-1" />
               {/* 右箭头图标 */}
             </div>
           </div>
           {/* 右侧中间部分导航和钱包功能 */}
           <div className="flex items-center space-x-6">
             {/* Docs 和 Ranking 靠右显示 */}
-            <div className="flex items-center space-x-6 text-black font-normal text-[18px] mr-6">
+            <div className="flex items-center space-x-6 text-black font-normal text-lg mr-6">
               <span className="hover:text-black cursor-pointer">Docs</span>
               <span className="hover:text-black cursor-pointer">Ranking</span>
             </div>
@@ -289,12 +282,12 @@ export default function IndexPage() {
             ) : (
               <div className="flex items-center rounded-full bg-white border border-[#FF1CE6] overflow-hidden">
                 {/* 显示金额部分 */}
-                <span className="text-blue-500 font-semibold px-4 py-1 bg-white">
+                <span className="text-[#FF1CE6] font-semibold px-4 py-1 bg-white">
                   {balance}
                 </span>
 
                 {/* Deposit按钮部分 */}
-                <button className="bg-[#FF1CE6] text-white px-4 py-1 font-semibold rounded-full">
+                <button className="bg-[#FF1CE6] text-white px-4 py-1 font-medium rounded-full">
                   Deposit
                 </button>
               </div>
@@ -305,8 +298,10 @@ export default function IndexPage() {
         {!selectedModel ? (
           <>
             <div className="mt-8">
-              <h3 className="text-2xl font-semibold">All Models</h3>
-              <p className="text-gray-500">
+              <h3 className="text-xl font-semibold text-[#111827]">
+                All Models
+              </h3>
+              <p className="text-base text-[#484848]">
                 Models provided by 0G Serving available by API or chatbot.
               </p>
             </div>
@@ -315,7 +310,7 @@ export default function IndexPage() {
             </div>
           </>
         ) : (
-          <div className="p-6">
+          <div className="py-6 px-2">
             {!showChat ? (
               <ModelDetail
                 modelData={selectedModel}

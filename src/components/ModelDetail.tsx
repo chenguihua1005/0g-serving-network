@@ -65,72 +65,81 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Breadcrumb */}
-      <div className="flex items-center mb-2 text-gray-600 text-sm">
-        <img src={leftIcon} alt="Logo" className="w-4 h-4" />
-        <span className="cursor-pointer text-blue-500" onClick={onBack}>
+      <div className="flex items-center mb-2">
+        <img src={leftIcon} alt="Logo" className="w-4 h-4 mt-1" />
+        <div
+          className="cursor-pointer text-xl text-[#B14EFF] font-semibold"
+          onClick={onBack}
+        >
           Models
-        </span>
+        </div>
         <span className="mx-2">/</span>
-        <span className="font-semibold">{modelData.Name}</span>
+        <span className="text-xl font-semibold">{modelData.Name}</span>
       </div>
 
-      <div className="mb-4 text-base text-[#374151]">
+      <div className="mb-6 text-base text-[#374151]">
         All information and deployment options for this model.
       </div>
 
       {/* Model Information */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-2xl font-semibold mb-4">{modelData.Name}</h2>
+      <div className="bg-white p-6 rounded-2xl shadow-md mb-8">
+        <h2 className="text-2xl font-medium text-black mb-4">
+          {modelData.Name}
+        </h2>
         <div className="flex justify-between items-center border-[#D1D5DB] p-4 mb-4 border-t-1">
           <div className="text-left">
-            <div className="text-[#EC6AB7] text-xl font-bold">
+            <div className="text-[#EC6AB7] text-[40px] font-semibold">
               {modelData.Price}
             </div>
-            <div className="text-black text-sm">Per 1M Tokens</div>
+            <div className="text-black text-lg font-medium">Per 1M Tokens</div>
           </div>
           <div className="text-left">
-            <div className="text-[#EC6AB7] text-xl font-bold">
+            <div className="text-[#EC6AB7] text-[40px] font-bold">
               {modelData.ZGAlignmentScore}
             </div>
-            <div className="text-black text-sm">0G Alignment Score</div>
+            <div className="text-black text-lg font-medium">
+              0G Alignment Score
+            </div>
           </div>
           <div className="text-left">
-            <div className="text-[#EC6AB7] text-xl font-bold">
+            <div className="text-[#EC6AB7] text-[40px] font-bold">
               {modelData.UserInteractedNumber.toLocaleString()}
             </div>
-            <div className="text-black text-sm">
+            <div className="text-black text-lg font-medium">
               Users interacted with model
             </div>
           </div>
+          <div></div>
         </div>
-        <p className="text-gray-600 mb-2">{modelData.Description}</p>
+        <p className="text-black text-lg mb-2">{modelData.Description}</p>
         <div className="flex items-center space-x-1 mt-6">
           <a
             href={modelData.HuggingFaceURL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#B14EFF] hover:text-[#B14EFF] hover:underline #B14EFF] hover:underline flex items-center"
+            className="text-[#B14EFF] font-semibold text-lg hover:text-[#B14EFF] hover:underline #B14EFF] flex items-center"
           >
             Huggingface
           </a>
           <img
             src={openNewIcon}
             alt="Open in new tab"
-            className="w-4 h-4 text-purple-500"
+            className="w-5 h-5 mt-1"
           />
         </div>
       </div>
 
       {/* Service Providers */}
-      <h3 className="text-[20px] text-[#111827] font-semibold mb-2">
+      <h3 className="text-[20px] text-[#111827] font-semibold mb-4">
         Service Providers
       </h3>
-      <div className="overflow-auto">
-        <table className="w-full bg-white rounded-lg shadow-md">
+
+      <div className="overflow-x-auto shadow-lg rounded-2xl">
+        <table className="w-full bg-white ">
           <thead>
-            <tr className="text-left border-b border-gray-300 text-[#141414]">
+            <tr className="text-left border-b border-gray-300 text-lg font-semibold text-[#141414]">
               <th className="px-4 py-2">Service Providers</th>
               <th className="px-4 py-2">Device</th>
               <th className="px-4 py-2">Geolocation</th>
@@ -145,7 +154,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                } border-b border-gray-200 cursor-pointer`}
+                } text-[#484848] text-lg border-b border-gray-200 cursor-pointer`}
                 onClick={() => handleRowClick(provider)}
               >
                 <td className="px-4 py-2">{provider.Name}</td>
@@ -156,8 +165,8 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                   <span
                     className={`flex items-center px-1 py-1 rounded-full ${
                       provider.Verifiability === "Secure"
-                        ? "text-[#484848] font-bold"
-                        : "text-[#484848] font-normal"
+                        ? "font-bold"
+                        : "font-normal"
                     }`}
                   >
                     {provider.Verifiability}
@@ -169,19 +178,17 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                       <img
                         src={checkmarkIcon}
                         alt="Checkmark"
-                        className="w-4 h-4"
+                        className="w-6 h-6"
                       />
                       <img
                         src={openNewIcon2}
                         alt="Open in new tab"
-                        className="w-4 h-4"
+                        className="w-6 h-6"
                       />
                     </>
                   )}
                 </td>
-                <td className="px-4 py-2 font-semibold">
-                  ${provider.InputPrice}
-                </td>
+                <td className="px-4 py-2">${provider.InputPrice}</td>
               </tr>
             ))}
           </tbody>
@@ -198,33 +205,33 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
           <ModalContent className="rounded-3xl border-1 p-6">
             {(onClose) => (
               <>
-                <ModalHeader className="flex justify-center mb-3">
+                <ModalHeader className="flex justify-center mb-3 text-black ">
                   <h2 className="text-2xl font-semibold text-center">
                     Confirmation
                   </h2>
                 </ModalHeader>
                 <ModalBody className="space-y-4">
                   <div>
-                    <p className="text-base font-semibold">Model Details:</p>
-                    <p className="text-base">{modelData.Name}</p>
+                    <p className="text-base font-bold">Model Details:</p>
+                    <p className="text-base font-normal">{modelData.Name}</p>
                   </div>
                   <div>
-                    <p className="text-base font-semibold">
+                    <p className="text-base font-bold">
                       Service Provider Details:
                     </p>
-                    <p className="text-base">
+                    <p className="text-base font-normal">
                       Device: {selectedProvider.Device}
                     </p>
-                    <p className="text-base">
+                    <p className="text-base font-normal">
                       Geolocation: {selectedProvider.Geolocation}
                     </p>
-                    <p className="text-base">
+                    <p className="text-base font-normal">
                       Service Provider: {selectedProvider.Name}
                     </p>
                   </div>
                   <div>
-                    <p className="text-base font-semibold">Pricing:</p>
-                    <div className="p-4 border rounded-lg bg-gray-50">
+                    <p className="text-base font-bold mb-2">Pricing:</p>
+                    <div className="p-4 border border-[#0000004D] rounded-lg w-48">
                       <p className="text-[#E51AF7] text-sm font-bold">
                         ${selectedProvider.InputPrice}
                       </p>
