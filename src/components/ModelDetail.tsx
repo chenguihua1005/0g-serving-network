@@ -88,7 +88,7 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
         <h2 className="text-2xl font-medium text-black mb-4">
           {modelData.Name}
         </h2>
-        <div className="flex justify-between items-center border-[#D1D5DB] p-4 mb-4 border-t-1">
+        <div className="flex justify-between items-center border-[#D1D5DB] py-4 mb-4 border-t-1">
           <div className="text-left">
             <div className="text-[#EC6AB7] text-[40px] font-semibold">
               {modelData.Price}
@@ -164,16 +164,14 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                 <td className="px-4 py-2 flex items-center space-x-2">
                   <span
                     className={`flex items-center px-1 py-1 rounded-full ${
-                      provider.Verifiability === "Secure"
+                      ["ZKML", "TeeML"].includes(provider.Verifiability)
                         ? "font-bold"
                         : "font-normal"
                     }`}
                   >
                     {provider.Verifiability}
                   </span>
-                  {["Ultra-Secure", "Secure"].includes(
-                    provider.Verifiability
-                  ) && (
+                  {["ZKML", "TeeML"].includes(provider.Verifiability) && (
                     <>
                       <img
                         src={checkmarkIcon}

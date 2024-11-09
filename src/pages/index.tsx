@@ -119,7 +119,7 @@ export default function IndexPage() {
       setUserInput("");
       // Mock API response
       setResponseMessage(
-        `Web3 network's cheer, tokens thrive, AI is near, no loss in sight, clear!`
+        "Keys unlock the now,\nCode and coin in cosmic play,\nFreedom's spark ignites."
       );
       setTimeout(() => {
         setIsTyping(true);
@@ -168,9 +168,7 @@ export default function IndexPage() {
                     <SelectItem key={provider.Name} textValue={provider.Name}>
                       <span className="flex items-center space-x-2">
                         <span>{provider.Name}</span>
-                        {["Ultra-Secure", "Secure"].includes(
-                          provider.Verifiability
-                        ) && (
+                        {["ZKML", "TeeML"].includes(provider.Verifiability) && (
                           <span className="border border-[#FF1CE6] text-[#FF1CE6] rounded-full px-2 py-0.5 text-sm">
                             Verified
                           </span>
@@ -197,15 +195,17 @@ export default function IndexPage() {
           {displayedMessage?.length > 0 && (
             <>
               <div className="self-start bg-[#9CA3AF] rounded-xl p-3 flex items-center space-x-2 w-9/20">
-                <span>{displayedMessage}</span>
+                <span className="whitespace-pre-line">{displayedMessage}</span>
               </div>
-              {displayedMessage?.length > 72 && (
-                <div className="flex self-left items-center ml-[425px] text-green-500">
-                  <span className="text-sm font-medium">Verified</span>
+              {displayedMessage?.length > 74 && (
+                <div className="flex self-left items-center ml-[165px]">
+                  <span className="text-sm font-medium italic text-[#4B5563]">
+                    Verified
+                  </span>
                   <img
                     src={checkmarkIcon}
                     alt="Checkmark"
-                    className="w-4 h-4 ml-1"
+                    className="w-4 h-4 ml-1 mt-1"
                   />
                 </div>
               )}

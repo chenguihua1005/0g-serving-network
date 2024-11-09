@@ -1,4 +1,3 @@
-import checkmarkIcon from "@/assets/check-mark.svg";
 import basicIcon from "@/assets/basic.svg";
 import secureIcon from "@/assets/secure.svg";
 import ultraSecureIcon from "@/assets/ultra-secure.svg";
@@ -64,30 +63,24 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
               <td className="px-6 py-4">{model.Price}</td>
               <td className="px-6 py-4">{model.ZGAlignmentScore}</td>
               <td className="px-6 py-4 flex items-center space-x-1">
-                {model.Verifiability === "Ultra-Secure" && (
+                {model.Verifiability === "ZKML" && (
                   <img
                     src={ultraSecureIcon}
-                    alt="Ultra-Secure Icon"
+                    alt="ZKML Icon"
                     className="w-9 mr-1"
                   />
                 )}
-                {model.Verifiability === "Secure" && (
-                  <img
-                    src={secureIcon}
-                    alt="Secure Icon"
-                    className="w-9 mr-1"
-                  />
+                {model.Verifiability === "TeeML" && (
+                  <img src={secureIcon} alt="TeeML Icon" className="w-9 mr-1" />
                 )}
-                {model.Verifiability === "Basic" && (
-                  <img src={basicIcon} alt="Basic Icon" className="w-9 mr-1" />
+                {model.Verifiability === "OpML" && (
+                  <img src={basicIcon} alt="OpML Icon" className="w-9 mr-1" />
                 )}
                 <span
                   className={`flex items-center px-3 py-1 italic ${
-                    model.Verifiability === "Ultra-Secure"
+                    ["ZKML", "TeeML"].includes(model.Verifiability)
                       ? " font-bold"
-                      : model.Verifiability === "Secure"
-                        ? " font-bold"
-                        : "font-normal"
+                      : "font-normal"
                   }`}
                 >
                   {model.Verifiability}
