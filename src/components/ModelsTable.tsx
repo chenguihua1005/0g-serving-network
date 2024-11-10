@@ -36,7 +36,7 @@ const ModelsTable: React.FC<ModelsTableProps> = ({ models, onModelClick }) => {
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="px-6 py-3 border-b font-semibold text-lg text-[#141414]"
+                className="px-6 py-[15px] border-b font-semibold text-lg text-[#141414]"
               >
                 <div className="flex items-center">
                   {col.label}

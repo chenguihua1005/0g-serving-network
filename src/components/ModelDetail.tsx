@@ -140,12 +140,12 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
         <table className="w-full bg-white ">
           <thead>
             <tr className="text-left border-b border-gray-300 text-lg font-semibold text-[#141414]">
-              <th className="px-4 py-2">Service Providers</th>
-              <th className="px-4 py-2">Device</th>
-              <th className="px-4 py-2">Geolocation</th>
-              <th className="px-4 py-2">Uptime</th>
-              <th className="px-4 py-2">Verifiability Type</th>
-              <th className="px-4 py-2">Price</th>
+              <th className="px-4 py-[15px]">Service Providers</th>
+              <th className="px-4 py-[15px]">Device</th>
+              <th className="px-4 py-[15px]">Geolocation</th>
+              <th className="px-4 py-[15px]">Uptime</th>
+              <th className="px-4 py-[15px]">Verifiability Type</th>
+              <th className="px-4 py-[15px]">Price</th>
             </tr>
           </thead>
           <tbody>
@@ -157,11 +157,11 @@ const ModelDetail: React.FC<ModelDetailProps> = ({
                 } text-[#484848] text-lg border-b border-gray-200 cursor-pointer`}
                 onClick={() => handleRowClick(provider)}
               >
-                <td className="px-4 py-2">{provider.Name}</td>
-                <td className="px-4 py-2">{provider.Device}</td>
-                <td className="px-4 py-2">{provider.Geolocation}</td>
-                <td className="px-4 py-2">{provider.Uptime}</td>
-                <td className="px-4 py-2 flex items-center space-x-2">
+                <td className="px-4 py-4">{provider.Name}</td>
+                <td className="px-4 py-4">{provider.Device}</td>
+                <td className="px-4 py-4">{provider.Geolocation}</td>
+                <td className="px-4 py-4">{provider.Uptime}</td>
+                <td className="px-4 py-4 flex items-center space-x-2">
                   <span
                     className={`flex items-center px-1 py-1 rounded-full ${
                       ["ZKML", "TeeML"].includes(provider.Verifiability)

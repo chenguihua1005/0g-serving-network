@@ -194,18 +194,18 @@ export default function IndexPage() {
           {/* 模拟接口回复的消息 */}
           {displayedMessage?.length > 0 && (
             <>
-              <div className="self-start bg-[#9CA3AF] rounded-xl p-3 flex items-center space-x-2 w-9/20">
+              <div className="self-start rounded-xl p-3 flex items-center space-x-2 w-9/20">
                 <span className="whitespace-pre-line">{displayedMessage}</span>
               </div>
               {displayedMessage?.length > 74 && (
-                <div className="flex self-left items-center ml-[165px]">
+                <div className="flex self-left items-center ml-3 mt-1">
                   <span className="text-sm font-medium italic text-[#4B5563]">
                     Verified
                   </span>
                   <img
                     src={checkmarkIcon}
                     alt="Checkmark"
-                    className="w-4 h-4 ml-1 mt-1"
+                    className="w-6 h-6 ml-1 mt-1"
                   />
                 </div>
               )}
