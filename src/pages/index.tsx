@@ -195,11 +195,11 @@ export default function IndexPage() {
           {/* 模拟接口回复的消息 */}
           {displayedMessage?.length > 0 && (
             <>
-              <div className="self-start rounded-xl p-3 flex items-center space-x-2 w-9/20">
+              <div className="self-start rounded-xl px-3 pt-1 flex items-center space-x-2 w-9/20">
                 <span className="whitespace-pre-line">{displayedMessage}</span>
               </div>
               {displayedMessage?.length > 74 && (
-                <div className="flex self-left items-center ml-3 mt-1">
+                <div className="flex self-left items-center ml-3">
                   <span className="text-sm font-medium italic text-[#4B5563]">
                     Verified
                   </span>
