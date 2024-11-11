@@ -11,6 +11,7 @@ import rightIcon from "@/assets/right.svg";
 import chatIcon from "@/assets/chat.svg";
 import attachmentIcon from "@/assets/attachment.svg";
 import checkmarkIcon from "@/assets/check-mark.svg";
+import backgroundImage from "@/assets/background.png";
 
 interface ChatProps {
   onBack: () => void; // 返回回调函数
@@ -244,7 +245,7 @@ export default function IndexPage() {
   return (
     <div
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/src/assets/background.png')" }}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="container mx-auto py-6">
         <header className="flex items-center justify-between">
